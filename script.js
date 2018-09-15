@@ -16,9 +16,14 @@ if (screen.height == 1080) {
   canvas.width = 1642;
 }
 
-if (screen.height == 720) {
+else if (screen.height == 720) {
   canvas.height = 684;
   canvas.width = 1094;
+}
+
+else {
+  canvas.height = 805;
+  canvas.width = 1117;
 }
 
 
