@@ -5,7 +5,7 @@
 	<title>Canvas Drawing App</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
+<body id="body">
 	
   <div id="app">
   
@@ -13,12 +13,13 @@
       <img src="images/small.png" data-mode="draw" data-size="5" class="active" />
       <img src="images/medium.png" data-mode="draw" data-size="10" />
       <img src="images/large.png" data-mode="draw" data-size="20" />
-      <img src="images/eraser.png" data-mode="erase" data-size="10" />
+      <img src="icons/png/001-swatches.png" data-mode="colourpicker"/>
+      <img src="images/eraser.png" data-mode="erase" data-size="5" />
       <img src="images/undo.png" data-action="undo" class="disabled" />
       <img src="images/delete.png" data-action="delete" />
     </div>
     
-    <canvas id="canvas" width="700" height="600"></canvas>
+    <canvas id="canvas"></canvas>
     
     <div id="colors" class="toolbar">
       <img src="images/black.png" data-color="#000000" class="active" />

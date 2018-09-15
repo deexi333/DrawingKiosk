@@ -6,7 +6,21 @@ var toolMode = 'draw';
 var toolSize = 5;
 var toolColor = '#000000';
 var canvasState = [];
+var canvas = document.getElementById('canvas');
 var undoButton = document.querySelector('[data-action=undo]');
+
+// changing screen height based of the screen dimensions
+console.log(screen.height);
+if (screen.height == 1080) {
+  canvas.height = 1026;
+  canvas.width = 1642;
+}
+
+if (screen.height == 720) {
+  canvas.height = 684;
+  canvas.width = 1094;
+}
+
 
 // Defaults
 context.strokeStyle = "#000000";
