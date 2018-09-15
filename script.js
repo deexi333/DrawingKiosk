@@ -2,9 +2,9 @@
 var canvas = document.querySelector( '#canvas' );
 var context = canvas.getContext( '2d' );
 var linePoints = [];
-var toolMode = 'draw'
+var toolMode = 'draw';
 var toolSize = 5;
-var toolColor = '#000000'
+var toolColor = '#000000';
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
 
@@ -15,10 +15,27 @@ context.lineJoin = "round";
 context.lineCap = "round";
 
 // Event listeners
-canvas.addEventListener( 'mousedown', draw );
-window.addEventListener( 'mouseup', stop );
+canvas.addEventListener( 'touchstart', draw );
+window.addEventListener( 'touchend', stop );
 document.querySelector( '#tools' ).addEventListener( 'click', selectTool );
 document.querySelector( '#colors' ).addEventListener( 'click', selectTool );
+
+// Prevent scrolling when touching the canvas
+document.body.addEventListener("touchstart", function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
+document.body.addEventListener("touchend", function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
+document.body.addEventListener("touchmove", function (e) {
+    if (e.target === canvas) {
+        e.preventDefault();
+    }
+}, { passive: false });
 
 // Functions
 function clearCanvas() {
@@ -31,15 +48,16 @@ function clearCanvas() {
 }
 
 function draw( e ) {
-  if ( e.which === 1 ) {
-    window.addEventListener( 'mousemove', draw );
-    var mouseX = e.pageX - canvas.offsetLeft;
-    var mouseY = e.pageY - canvas.offsetTop;
-    var mouseDrag = e.type === 'mousemove';
-    if ( e.type === 'mousedown' ) saveState();
-    linePoints.push( { x: mouseX, y: mouseY, drag: mouseDrag, width: toolSize, color: toolColor } );
+
+    console.log("hi i printed");
+    window.addEventListener( 'touchmove', draw );
+    var touchX = e.targetTouches[0].pageX - canvas.offsetLeft;
+    var touchY = e.targetTouches[0].pageY - canvas.offsetTop;
+    var touchDrag = e.type === 'touchmove';
+    if ( e.type === 'touchstart' ) saveState();
+    linePoints.push( { x: touchX, y: touchY, drag: touchDrag, width: toolSize, color: toolColor } );
     updateCanvas();
-  }
+
 }
 
 function highlightButton( button ) {
@@ -72,6 +90,7 @@ function renderLine() {
 }
 
 function saveState() {
+    console.log("saving");
   canvasState.unshift( context.getImageData( 0, 0, canvas.width, canvas.height ) );
   linePoints = [];
   if ( canvasState.length > 25 ) canvasState.length = 25;
@@ -85,12 +104,12 @@ function selectTool( e ) {
   toolMode = e.target.dataset.mode || toolMode;
   toolColor = e.target.dataset.color || toolColor;
   if ( e.target === undoButton ) undoState();
-  if ( e.target.dataset.action == 'delete' ) clearCanvas();
+  if ( e.target.dataset.action === 'delete' ) clearCanvas();
 }
 
 function stop( e ) {
   if ( e.which === 1 ) {
-    window.removeEventListener( 'mousemove', draw );
+    window.removeEventListener( 'touchmove', draw );
   }
 }
 
