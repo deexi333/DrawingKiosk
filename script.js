@@ -67,8 +67,9 @@ function clearCanvas() {
 }
 
 function draw(e) {
-
     window.addEventListener('touchmove', draw);
+    // to change opacity  
+    context.globalAlpha = 0.5;
     var touchX = e.targetTouches[0].pageX - canvas.offsetLeft;
     var touchY = e.targetTouches[0].pageY - canvas.offsetTop;
     var touchDrag = e.type === 'touchmove';
