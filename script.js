@@ -1,12 +1,12 @@
 // Variable initialisation
-var canvas = document.querySelector( '#canvas' );
-var context = canvas.getContext( '2d' );
+var canvas = document.querySelector('#canvas');
+var context = canvas.getContext('2d');
 var linePoints = [];
 var toolMode = 'draw';
 var toolSize = 5;
 var toolColor = '#000000';
 var canvasState = [];
-var undoButton = document.querySelector( '[data-action=undo]' );
+var undoButton = document.querySelector('[data-action=undo]');
 
 // Defaults
 context.strokeStyle = "#000000";
@@ -15,10 +15,10 @@ context.lineJoin = "round";
 context.lineCap = "round";
 
 // Event listeners
-canvas.addEventListener( 'touchstart', draw );
-window.addEventListener( 'touchend', stop );
-document.querySelector( '#tools' ).addEventListener( 'click', selectTool );
-document.querySelector( '#colors' ).addEventListener( 'click', selectTool );
+canvas.addEventListener('touchstart', draw);
+window.addEventListener('touchend', stop);
+document.querySelector('#tools').addEventListener('click', selectTool);
+document.querySelector('#colors').addEventListener('click', selectTool);
 
 // Prevent scrolling when touching the canvas
 document.body.addEventListener("touchstart", function (e) {
@@ -39,21 +39,21 @@ document.body.addEventListener("touchmove", function (e) {
 
 // Functions
 function clearCanvas() {
-    var result = confirm( 'Are you sure you want to delete the picture?' );
-    if ( result ) {
+    var result = confirm('Are you sure you want to delete the picture?');
+    if (result) {
         context.clearRect( 0, 0, canvas.width, canvas.height );
         canvasState.length = 0;
-        undoButton.classList.add( 'disabled' );
+        undoButton.classList.add('disabled');
     }
 }
 
-function draw( e ) {
+function draw(e) {
 
-    window.addEventListener( 'touchmove', draw );
+    window.addEventListener('touchmove', draw);
     var touchX = e.targetTouches[0].pageX - canvas.offsetLeft;
     var touchY = e.targetTouches[0].pageY - canvas.offsetTop;
     var touchDrag = e.type === 'touchmove';
-    if ( e.type === 'touchstart' ) saveState();
+    if (e.type === 'touchstart') saveState();
     linePoints.push( { x: touchX, y: touchY, drag: touchDrag, width: toolSize, color: toolColor } );
     updateCanvas();
 
