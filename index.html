@@ -17,14 +17,35 @@
   <div id="app">
   
     <div id="tools" class="toolbar">
-      <img src="images/small.png" data-mode="draw" data-size="5" class="active" />
-      <img src="images/medium.png" data-mode="draw" data-size="10" />
-      <img src="images/large.png" data-mode="draw" data-size="20" />
-      <img src="icons/png/001-swatches.png" data-mode="colourpicker"/>
-      <img src="images/eraser.png" data-mode="erase" data-size="5" />
+      
+      <a href="#" data-toggle="brush" title="Popover Header">
+         <img src="images/small.png" data-mode="draw" data-size="5" class="active" />
+      </a>
+      
+      <a href="#" data-toggle="colours" title="Popover Header" data-content="Some content inside the popover">
+        <img src="icons/png/001-swatches.png" data-mode="colourpicker"/>
+      </a>
+      
+      <a href="#" data-toggle="erase" title="Popover Header" data-content="Some content inside the popover">
+        <img src="images/eraser.png" data-mode="erase" data-size="5" />
+      </a>
+     
       <img src="images/undo.png" data-action="undo" class="disabled" />
       <img src="images/delete.png" data-action="delete" />
     </div>
+    
+    <script>
+      $(document).ready(function(){
+          $('[data-toggle="colours"]').popover();
+          $('[data-toggle="brush"]').popover({
+            html: true,
+            title: 'Choose a size',
+            content: '<div class="d-flex justify-content-center my-4"><span class="font-weight-bold indigo-text mr-2">0</span><form class="range-field w-25"><input class="border-0" type="range" min="0" max="100" /></form><span class="font-weight-bold indigo-text ml-2">100</span></div>'
+          });
+          $('[data-toggle="erase"]').popover();
+      });
+      
+    </script>
     
     <canvas id="canvas"></canvas>
     
