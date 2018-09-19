@@ -87,7 +87,7 @@ body {
 
 .slider {
     -webkit-appearance: none;
-    width: 100%;
+    width: auto;
     height: 5px;
     border-radius: 5px;   
     background: #ffffff;
@@ -106,10 +106,20 @@ body {
     cursor: pointer;
 }
 
+#slide-brush {
+  padding: 8% 8% 8% 18%;
+  display: inline-block;
+}
+
+#slide-eraser {
+  padding: 8% 18% 8% 8%;
+  display: inline-block;
+}
+
 
 #toggle {
-  width: 100px;
-  height: 100px;
+  width: 30%;
+  height: 100%;
   background: #ccc;
 }
 

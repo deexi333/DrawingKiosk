@@ -32,6 +32,7 @@
       <img src="images/undo.png" data-action="undo" class="disabled" />
       
       <div id="toggle">
+      <div id="slide-brush">
       <form oninput="output.value = parseInt(range.value)">
         <div class="slidecontainer" >
            <input type="range" name="range" min="1" max="100" value="50" class="slider">
@@ -40,7 +41,9 @@
           </div>
         </div>
       </form>
+        </div>
       
+        <div id="slide-eraser">
       <form oninput="output.value = parseInt(range.value)">
         <div class="slidecontainer" >
            <input type="range" name="range" min="1" max="100" value="50" class="slider">
@@ -49,15 +52,11 @@
           </div>
         </div>
       </form>
+        </div>
       </div>
       
       <div id="toggle_ca">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-      </ol>
       <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
           <button style="background-color: #e1010c" data-color="#e1010c"></button>
@@ -81,7 +80,7 @@
         </div>
       
       <div id="contains">
-        <div class="colours1">
+        <div id="colours1">
           <button style="background-color: #d4507f" data-color="#d4507f" class="active"></button>
           <button style="background-color: #e1010c" data-color="#e1010c"></button>
           <button style="background-color: #7a2e20" data-color="#7a2e20"></button>
@@ -90,7 +89,7 @@
           <button style="background-color: #fedd02" data-color="#fedd02"></button>
         </div>
 
-        <div class="colours2">
+        <div id="colours2">
           <button style="background-color: #9aa837" data-color="#9aa837"></button>
           <button style="background-color: #146343" data-color="#146343"></button>
           <button style="background-color: #8f9f9c" data-color="#8f9f9c"></button>
