@@ -4,26 +4,25 @@ var context = canvas.getContext('2d');
 var linePoints = [];
 var toolMode = 'draw';
 var toolSize = 5;
-var toolColor = '#000000';
+var toolColor = '#d4507f';
 var canvasState = [];
-var canvas = document.getElementById('canvas');
 var undoButton = document.querySelector('[data-action=undo]');
 
 // changing screen height based of the screen dimensions
 console.log(screen.height);
 if (screen.height == 1080) {
-  canvas.height = 1026;
-  canvas.width = 1642;
+  canvas.height = 872;
+  canvas.width = 1824;
 }
 
 else if (screen.height == 720) {
-  canvas.height = 684;
-  canvas.width = 1094;
+  canvas.height = 581;
+  canvas.width = 1216;
 }
 
 else {
-  canvas.height = 805;
-  canvas.width = 1117;
+  canvas.height = 684;
+  canvas.width = 1241;
 }
 
 
@@ -37,7 +36,6 @@ context.lineCap = "round";
 canvas.addEventListener('touchstart', draw);
 window.addEventListener('touchend', stop);
 document.querySelector('#tools').addEventListener('click', selectTool);
-document.querySelector('#colors').addEventListener('click', selectTool);
 
 // Prevent scrolling when touching the canvas
 document.body.addEventListener("touchstart", function (e) {
@@ -141,3 +139,4 @@ function updateCanvas() {
     context.putImageData( canvasState[ 0 ], 0, 0 );
     renderLine();
 }
+

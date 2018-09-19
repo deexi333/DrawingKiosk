@@ -6,8 +6,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css" />
+  <!-- Animation -->
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  
+  <!-- Animation -->
+  <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
@@ -17,50 +24,118 @@
   <div id="app">
   
     <div id="tools" class="toolbar">
+
+      <img src="images/small.png" id="brush" data-mode="draw" data-size="5" class="active" />
       
-      <a href="#" data-toggle="brush" title="Popover Header">
-         <img src="images/small.png" data-mode="draw" data-size="5" class="active" />
-      </a>
-      
-      <a href="#" data-toggle="colours" title="Popover Header" data-content="Some content inside the popover">
-        <img src="icons/png/001-swatches.png" data-mode="colourpicker"/>
-      </a>
-      
-      <a href="#" data-toggle="erase" title="Popover Header" data-content="Some content inside the popover">
-        <img src="images/eraser.png" data-mode="erase" data-size="5" />
-      </a>
-     
+      <img src="images/eraser.png" id="eraser" data-mode="erase" data-size="5" />
+      <img src="icons/png/001-swatches.png" id="swatch" data-mode="colourpicker"/>
       <img src="images/undo.png" data-action="undo" class="disabled" />
-      <img src="images/delete.png" data-action="delete" />
-    </div>
-    
-    <script>
-      $(document).ready(function(){
-          $('[data-toggle="colours"]').popover();
-          $('[data-toggle="brush"]').popover({
-            html: true,
-            title: 'Choose a size',
-            content: '<div class="d-flex justify-content-center my-4"><span class="font-weight-bold indigo-text mr-2">0</span><form class="range-field w-25"><input class="border-0" type="range" min="0" max="100" /></form><span class="font-weight-bold indigo-text ml-2">100</span></div>'
-          });
-          $('[data-toggle="erase"]').popover();
-      });
       
-    </script>
+      <div id="toggle">
+      <form oninput="output.value = parseInt(range.value)">
+        <div class="slidecontainer" >
+           <input type="range" name="range" min="1" max="100" value="50" class="slider">
+          <div class="slide-output">
+            <output name="output"> 50 </output>
+          </div>
+        </div>
+      </form>
+      
+      <form oninput="output.value = parseInt(range.value)">
+        <div class="slidecontainer" >
+           <input type="range" name="range" min="1" max="100" value="50" class="slider">
+          <div class="slide-output">
+            <output name="output"> 50 </output>
+          </div>
+        </div>
+      </form>
+      </div>
+      
+      <div id="toggle_ca">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active">
+          <button style="background-color: #e1010c" data-color="#e1010c"></button>
+        </div>
+        <div class="carousel-item">
+          <button style="background-color: #fc9b57" data-color="#fc9b57"></button>
+        </div>
+        <div class="carousel-item">
+          <button style="background-color: #8f9f9c" data-color="#8f9f9c"></button>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+        </div>
+      
+      <div id="contains">
+        <div class="colours1">
+          <button style="background-color: #d4507f" data-color="#d4507f" class="active"></button>
+          <button style="background-color: #e1010c" data-color="#e1010c"></button>
+          <button style="background-color: #7a2e20" data-color="#7a2e20"></button>
+          <button style="background-color: #fe7200" data-color="#fe7200"></button>
+          <button style="background-color: #fc9b57" data-color="#fc9b57"></button>
+          <button style="background-color: #fedd02" data-color="#fedd02"></button>
+        </div>
+
+        <div class="colours2">
+          <button style="background-color: #9aa837" data-color="#9aa837"></button>
+          <button style="background-color: #146343" data-color="#146343"></button>
+          <button style="background-color: #8f9f9c" data-color="#8f9f9c"></button>
+          <button style="background-color: #1f4acd" data-color="#1f4acd"></button>
+          <button style="background-color: #012c5f" data-color="#012c5f"></button>
+          <button style="background-color: #19193f" data-color="#19193f"></button>
+        </div>
+      </div>
+      
+      
+      <img src="images/delete.png" data-action="delete" />
+      
+    </div>
+   
     
     <canvas id="canvas"></canvas>
-    
-    <div id="colors" class="toolbar">
-      <img src="images/black.png" data-color="#000000" class="active" />
-      <img src="images/red.png" data-color="#cc0000" />
-      <img src="images/yellow.png" data-color="#ffcc00" />
-      <img src="images/green.png" data-color="#00cc00" />
-      <img src="images/cyan.png" data-color="#00cccc" />
-      <img src="images/blue.png" data-color="#0000cc" />
-      <img src="images/magenta.png" data-color="#cc00cc" />
-    </div>
-  
+
   </div>
   
   <script type="text/javascript" src="script.js"></script>
+  <script>
+  
+    function runEffect() {
+      // Run the effect
+      $( "#toggle" ).toggle( "drop" );
+    };
+    
+    function runCarousel() {
+      // Run the effect
+      $( "#toggle_ca" ).toggle( "drop" );
+    };
+    
+  $( "#brush" ).on( "click", function() {
+      runEffect();
+    });
+    
+    $( "#eraser" ).on( "click", function() {
+      runEffect();
+    });
+    
+     $( "#swatch" ).on( "click", function() {
+      runCarousel();
+    });
+
+</script>
+ 
 </body>
 </html>

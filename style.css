@@ -5,8 +5,7 @@
 }
 
 body {
-  background-color: bl;
-  background-image: url( images/wood.jpg );
+  background-color: #e69138;
   background-size: cover;
   height: 100vh;
   display: flex;
@@ -18,22 +17,28 @@ body {
   width: 95%;
   height: 95vh;
   display: grid;
-  grid-template-columns: 5% 90% 5%; 
-  box-shadow: 0px 1px 10px rgba( 0, 0, 0, 0.5 );
+  grid-template-rows: 13% 2% 85%; 
 }
 
 .toolbar {
-  background-color: lightgray;
+  background-color: #f1c232;
+  border: 0;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-around;
   align-items: center;
+}
+
+#contains {
+  display: flex;
+  flex-direction: column;
 }
 
 #canvas {
   background-color: white;
   background-image: url( images/paper.jpg );
   background-size: cover;
+  grid-area: 3;
 }
 
 .toolbar img {
@@ -56,3 +61,72 @@ body {
   opacity: 0.5;
   pointer-events: none;
 }
+
+#contains button {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #ffffff;
+  border-radius: 25%;
+  box-shadow:0 2px 6px rgba( 0,0,0,0.25 );
+}
+
+#contains .contains button.active {
+  border-color: #00ccff;
+}
+
+
+#contains button:hover {
+  transform: scale(1.1);
+}
+
+#contains button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 5px;
+    border-radius: 5px;   
+    background: #ffffff;
+    outline: none;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+
+#toggle {
+  width: 100px;
+  height: 100px;
+  background: #ccc;
+}
+
+#toggle_ca {
+  width: 100px;
+  height: 100px;
+}
+
+
+#carouselExampleIndicators button{
+  width: 100px;    
+  height: 100px;
+  border: 3px solid #ffffff;
+  border-radius: 25%;
+  box-shadow:0 2px 6px rgba( 0,0,0,0.25 );
+}
+
+
+
+
