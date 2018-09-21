@@ -3,7 +3,8 @@ var canvas = document.querySelector( '#canvas' );
 var context = canvas.getContext( '2d' );
 var linePoints = [];
 var toolMode = 'draw'
-var toolSize = 5;
+var toolSize = 50;
+var toolOpacity = 50;
 var toolColor = '#000000'
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
@@ -37,6 +38,14 @@ window.addEventListener( 'resize', resizeCanvas );
 
 // Add function for component
 document.querySelector( '#tools' ).addEventListener( 'click', selectTool );
+document.getElementById( 'widthRangeInput' ).oninput = (evt) => {
+  toolSize = parseInt(evt.target.value);
+  document.getElementById( 'widthRangeOutput' ).value = evt.target.value;
+};
+document.getElementById( 'opacityRangeInput' ).oninput = (evt) => {
+  toolOpacity = parseInt(evt.target.value);
+  document.getElementById( 'opacityRangeOutput' ).value = evt.target.value;
+};
 resizeCanvas();
 
 // Create colors
@@ -91,7 +100,7 @@ function draw( e ) {
     window.addEventListener( 'mousemove', draw );
     window.addEventListener( 'touchmove', draw );
     // To change the opacity
-    context.globalAlpha = 0.5;
+    context.globalAlpha = toolOpacity / 100;
     var mouseX = e.pageX - canvas.offsetLeft;
     var mouseY = e.pageY - canvas.offsetTop;
     var mouseDrag = e.type === 'mousemove';
@@ -127,6 +136,8 @@ function renderLine() {
   }
 
   if ( toolMode === 'erase' ) {
+    document.getElementById( 'opacityRange' ).classList.add('d-none');
+    context.globalAlpha = 1;
     context.globalCompositeOperation = 'destination-out';
   } else {
     context.globalCompositeOperation = 'source-over';
@@ -148,6 +159,16 @@ function selectTool( e ) {
   toolSize = e.target.dataset.size || toolSize;
   // canvas.style.cursor = 'url( images/size'+toolSize+'.cur ), crosshair';
   toolMode = e.target.dataset.mode || toolMode;
+  if ( e.target.dataset.mode === 'erase' ) {
+    document.getElementById( 'opacityRange' ).classList.add('d-none');
+    document.getElementById( 'widthRange' ).classList.remove('d-none');
+  } else if (e.target.dataset.mode === 'draw') {
+    document.getElementById( 'opacityRange' ).classList.remove('d-none');
+    document.getElementById( 'widthRange' ).classList.remove('d-none');
+  } else {
+    document.getElementById( 'opacityRange' ).classList.add('d-none');
+    document.getElementById( 'widthRange' ).classList.add('d-none');
+  }
   toolColor = e.target.dataset.color || toolColor;
   if ( e.target === undoButton ) undoState();
   if ( e.target.dataset.action == 'delete' ) clearCanvas();
