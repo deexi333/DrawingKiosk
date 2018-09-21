@@ -16,7 +16,6 @@
     <div id="tools">
       <img src="images/small.png" id="brush" data-mode="draw" class="active" />
       <img src="images/eraser.png" id="eraser" data-mode="erase"/>
-      <img src="icons/png/001-swatches.png" id="swatch" data-mode="colourpicker"/>
       <img src="images/undo.png" data-action="undo" class="disabled" />    
       <img src="images/delete.png" data-action="delete"/>
     </div>
@@ -30,20 +29,19 @@
         </div>
         <div class="form-group" id="opacityRange">
           <label>Opacity&ensp;</label>
-          <input id="opacityRangeInput" type="range"min="10" max="100" value="50" class="slider">
-          <output id="opacityRangeOutput"> 50 </output>
+          <input id="opacityRangeInput" type="range"min="10" max="100" value="100" class="slider">
+          <output id="opacityRangeOutput"> 100 </output>
         </div>
       </form>
     </div>
-     
+    <div>
+      <input id="sampleBrush" type="color"
+        style="background-color: white; padding: 0px; border: 0px; width: 50px; height: 50px; opacity: 1;"
+        value="#000000"/>
+    </div>
   
     
-    <div id="contains">
-      <div id="colors1">
-      </div>
-
-      <div id="colors2">
-      </div>
+    <div id="colorContainer" style="display: flex; flex-direction: row; flex-wrap: wrap; overflow: auto; align-content: space-around; justify-content: space-around; width: 40%; height: 90%">
     </div>
   </div>
 
@@ -52,31 +50,5 @@
   </div>
   
   <script type="text/javascript" src="script.js"></script>
-  <script>
-  
-    function runEffect() {
-      // Run the effect
-      $( "#toggle" ).toggle( "drop" );
-    };
-    
-    function runCarousel() {
-      // Run the effect
-      $( "#toggle_ca" ).toggle( "drop" );
-    };
-    
-  $( "#brush" ).on( "click", function() {
-      runEffect();
-    });
-    
-    $( "#eraser" ).on( "click", function() {
-      runEffect();
-    });
-    
-     $( "#swatch" ).on( "click", function() {
-      runCarousel();
-    });
-
-</script>
- 
 </body>
 </html>

@@ -4,8 +4,9 @@ var context = canvas.getContext( '2d' );
 var linePoints = [];
 var toolMode = 'draw'
 var toolSize = 50;
-var toolOpacity = 50;
-var toolColor = '#000000'
+var toolOpacity = 100;
+var toolColor = '#000000';
+var colorsList = [];
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
 
@@ -39,50 +40,22 @@ window.addEventListener( 'resize', resizeCanvas );
 // Add function for component
 document.querySelector( '#tools' ).addEventListener( 'click', selectTool );
 document.getElementById( 'widthRangeInput' ).oninput = (evt) => {
-  toolSize = parseInt(evt.target.value);
-  document.getElementById( 'widthRangeOutput' ).value = evt.target.value;
+  var value = parseInt(evt.target.value)
+  toolSize = value;
+  document.getElementById( 'widthRangeOutput' ).value = value;
+  document.getElementById( 'sampleBrush' ).style.width = `${value+10}px`;
+  document.getElementById( 'sampleBrush' ).style.height = `${value+10}px`;
 };
 document.getElementById( 'opacityRangeInput' ).oninput = (evt) => {
-  toolOpacity = parseInt(evt.target.value);
-  document.getElementById( 'opacityRangeOutput' ).value = evt.target.value;
+  var value = parseInt(evt.target.value)
+  toolOpacity = value;
+  document.getElementById( 'opacityRangeOutput' ).value = value;
+  document.getElementById( 'sampleBrush' ).style.opacity = `${value/100}`;
+};
+document.getElementById( 'sampleBrush' ).oninput = (evt) => {
+  toolColor = evt.target.value;
 };
 resizeCanvas();
-
-// Create colors
-var colors1 = [
-  "#d4507f",
-  "#e1010c",
-  "#7a2e20",
-  "#fe7200",
-  "#fc9b57",
-  "#fedd02"
-];
-var colors2 = [
-  "#9aa837",
-  "#146343",
-  "#8f9f9c",
-  "#1f4acd",
-  "#012c5f",
-  "#19193f"
-];
-
-colors1.forEach(color => {
-  var button = document.createElement("button");
-  button.setAttribute("style", `background-color: ${color}`);
-  button.onclick = () => {
-    toolColor = color;
-  }
-  document.getElementById("colors1").appendChild(button);
-});
-
-colors2.forEach(color => {
-  var button = document.createElement("button");
-  button.setAttribute("style", `background-color: ${color}`);
-  button.onclick = () => {
-    toolColor = color;
-  }
-  document.getElementById("colors2").appendChild(button);
-});
 
 // Functions
 function clearCanvas() {
@@ -95,8 +68,11 @@ function clearCanvas() {
 }
 
 function draw( e ) {
-  waitTime = 0;
   if ( e.which === 1 || e.type === 'touchstart' || e.type === 'touchmove') {
+    waitTime = 0;
+    if (!colorsList.includes(toolColor)) {
+      saveColor(toolColor);
+    }
     window.addEventListener( 'mousemove', draw );
     window.addEventListener( 'touchmove', draw );
     // To change the opacity
@@ -196,4 +172,25 @@ function resizeCanvas() {
   canvas.width = parseInt(screen.width * 0.95);
   canvas.height = parseInt(screen.height * 0.8);
   if ( canvasState.length ) updateCanvas();
+}
+
+function saveColor(color) {
+  if (colorsList.length >= 25) {
+    var id = colorsList.shift();
+    document.getElementById("colorContainer").removeChild(document.getElementById(id));
+  }
+  colorsList.push(color);
+  var div = document.createElement("div");
+  div.setAttribute("style", `background-color: ${color}; width: 50px; height: 50px`);
+  div.setAttribute("class", 'rounded-circle');
+  div.setAttribute("id", color);
+  div.onclick = () => {
+    toolColor = color;
+    document.getElementById('opacityRangeInput').value = 100;
+    document.getElementById( 'opacityRangeOutput' ).value = 100;
+    toolOpacity = 100;
+    document.getElementById( 'sampleBrush' ).value = color;
+    document.getElementById( 'sampleBrush' ).style.opacity = 1;
+  }
+  document.getElementById("colorContainer").appendChild(div);
 }
