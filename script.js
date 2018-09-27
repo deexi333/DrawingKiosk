@@ -9,6 +9,19 @@ var toolColor = '#FFFFFF';
 window.colorsList = [];
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
+var currentBackgroundIdx = 0;
+
+// Background colors
+var backgroundColors = [
+  {
+    body: '#e69138',
+    toolBox: '#f1c232'
+  },
+  {
+    body: '#F20D06',
+    toolBox: '#F206B2'
+  }
+]
 
 // Create default colors
 var colors1 = [
@@ -72,6 +85,16 @@ window.addEventListener( 'touchend', stop );
 window.addEventListener( 'resize', resizeCanvas );
 
 // Add function for component
+document.getElementById('next').onclick = () => {
+  currentBackgroundIdx = (currentBackgroundIdx + 1) % backgroundColors.length;
+  document.body.style.backgroundColor = backgroundColors[currentBackgroundIdx].body;
+  document.getElementById('toolbar').style.backgroundColor = backgroundColors[currentBackgroundIdx].toolBox;
+}
+document.getElementById('prev').onclick = () => {
+  currentBackgroundIdx = (currentBackgroundIdx - 1 + backgroundColors.length) % backgroundColors.length;
+  document.body.style.backgroundColor = backgroundColors[currentBackgroundIdx].body;
+  document.getElementById('toolbar').style.backgroundColor = backgroundColors[currentBackgroundIdx].toolBox;
+}
 document.querySelector( '#tools' ).addEventListener( 'click', selectTool );
 document.getElementById( 'widthRangeInput' ).oninput = (evt) => {
   var value = parseInt(evt.target.value)
