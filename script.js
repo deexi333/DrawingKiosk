@@ -18,8 +18,32 @@ var backgroundColors = [
     toolBox: '#f1c232'
   },
   {
-    body: '#F20D06',
+    body: '#F55C5C',
     toolBox: '#F206B2'
+  },
+  {
+    body: '#696969',
+    toolBox: '#C0C0C0'
+  },
+  {
+    body: '#00BFFF',
+    toolBox: '#F0F8FF'
+  },
+  {
+    body: '#98FB98',
+    toolBox: '#C0C0C0'
+  },
+  {
+    body: '#FFDEAD',
+    toolBox: '#F4A460'
+  },
+  {
+    body: '#9370DB',
+    toolBox: '#E6E6FA'
+  },
+  {
+    body: '#E6E6FA',
+    toolBox: '#FFF0F5'
   }
 ]
 
