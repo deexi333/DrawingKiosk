@@ -5,10 +5,44 @@ var linePoints = [];
 var toolMode = 'draw'
 var toolSize = 50;
 var toolOpacity = 100;
-var toolColor = '#000000';
-var colorsList = [];
+var toolColor = '#FFFFFF';
+window.colorsList = [];
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
+
+// Create default colors
+var colors1 = [
+  "#d4507f",
+  "#e1010c",
+  "#7a2e20",
+  "#fe7200",
+  "#fc9b57",
+  "#fedd02"
+];
+var colors2 = [
+  "#9aa837",
+  "#146343",
+  "#8f9f9c",
+  "#1f4acd",
+  "#012c5f",
+  "#19193f"
+];
+ colors1.forEach(color => {
+  var button = document.createElement("button");
+  button.setAttribute("style", `background-color: ${color}`);
+  button.onclick = () => {
+    toolColor = color;
+  }
+  document.getElementById("colors1").appendChild(button);
+});
+ colors2.forEach(color => {
+  var button = document.createElement("button");
+  button.setAttribute("style", `background-color: ${color}`);
+  button.onclick = () => {
+    toolColor = color;
+  }
+  document.getElementById("colors2").appendChild(button);
+});
 
 // Couting no action time
 var waitTime = 0;
@@ -43,8 +77,8 @@ document.getElementById( 'widthRangeInput' ).oninput = (evt) => {
   var value = parseInt(evt.target.value)
   toolSize = value;
   document.getElementById( 'widthRangeOutput' ).value = value;
-  document.getElementById( 'sampleBrush' ).style.width = `${value+10}px`;
-  document.getElementById( 'sampleBrush' ).style.height = `${value+10}px`;
+  document.getElementById( 'sampleBrush' ).style.width = `${value-10}px`;
+  document.getElementById( 'sampleBrush' ).style.height = `${value-10}px`;
 };
 document.getElementById( 'opacityRangeInput' ).oninput = (evt) => {
   var value = parseInt(evt.target.value)
@@ -59,18 +93,18 @@ resizeCanvas();
 
 // Functions
 function clearCanvas() {
-  var result = confirm( 'Are you sure you want to delete the picture?' );
+  var result = confirm( 'Are you sure you want to delete the picture and saved colors?' );
   if ( result ) {
-    context.clearRect( 0, 0, canvas.width, canvas.height );
-    canvasState.length = 0;
-    undoButton.classList.add( 'disabled' );
+    // context.clearRect( 0, 0, canvas.width, canvas.height );
+    // canvasState.length = 0;
+    // undoButton.classList.add( 'disabled' );
   }
 }
 
 function draw( e ) {
   if ( e.which === 1 || e.type === 'touchstart' || e.type === 'touchmove') {
     waitTime = 0;
-    if (!colorsList.includes(toolColor)) {
+    if (!window.colorsList.includes(toolColor)) {
       saveColor(toolColor);
     }
     window.addEventListener( 'mousemove', draw );
@@ -147,7 +181,10 @@ function selectTool( e ) {
   }
   toolColor = e.target.dataset.color || toolColor;
   if ( e.target === undoButton ) undoState();
-  if ( e.target.dataset.action == 'delete' ) clearCanvas();
+  if ( e.target.dataset.action == 'delete' ) {
+    clearCanvas();
+    location.reload();
+  }
 }
 
 function stop( e ) {
@@ -175,11 +212,11 @@ function resizeCanvas() {
 }
 
 function saveColor(color) {
-  if (colorsList.length >= 25) {
-    var id = colorsList.shift();
+  if (window.colorsList.length >= 7) {
+    var id = window.colorsList.shift();
     document.getElementById("colorContainer").removeChild(document.getElementById(id));
   }
-  colorsList.push(color);
+  window.colorsList.push(color);
   var div = document.createElement("div");
   div.setAttribute("style", `background-color: ${color}; width: 50px; height: 50px`);
   div.setAttribute("class", 'rounded-circle');

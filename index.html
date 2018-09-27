@@ -11,6 +11,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body>
+  <a style="margin-right: 10px">
+    <span class="carousel-control-prev-icon"></span>
+  </a>
   <div id="app">
   <div class="toolbar">
     <div id="tools">
@@ -22,33 +25,37 @@
     
     <div id="inputRange">
       <form>
-        <div class="form-group" id="widthRange">
+        <div id="widthRange">
           <label>Width &ensp;&ensp;</label>
           <input id="widthRangeInput" type="range" min="1" max="100" value="50" class="slider">
           <output id="widthRangeOutput"> 50 </output>
         </div>
-        <div class="form-group" id="opacityRange">
+        <div id="opacityRange">
           <label>Opacity&ensp;</label>
           <input id="opacityRangeInput" type="range"min="10" max="100" value="100" class="slider">
           <output id="opacityRangeOutput"> 100 </output>
         </div>
       </form>
     </div>
+    <div id="contains">
+      <div id="colors1">
+      </div>
+       <div id="colors2">
+      </div>
+    </div>
+    <div id="colorContainer" style="display: flex; flex-direction: row; flex-wrap: wrap; overflow: auto; align-items: center; align-content: space-around; justify-content: space-around; width: 30%; height: 90%">
+    </div>
     <div>
       <input id="sampleBrush" type="color"
-        style="background-color: white; padding: 0px; border: 0px; width: 50px; height: 50px; opacity: 1;"
-        value="#000000"/>
-    </div>
-  
-    
-    <div id="colorContainer" style="display: flex; flex-direction: row; flex-wrap: wrap; overflow: auto; align-content: space-around; justify-content: space-around; width: 40%; height: 90%">
+        style="background-color: black; padding: 0px; border: 0px; width: 50px; height: 50px; opacity: 1;"
+        value="#FFFFFF"/>
     </div>
   </div>
-
   <canvas id="canvas"></canvas>
-
   </div>
-  
+  <a style="margin-left: 10px">
+    <span class="carousel-control-next-icon"></span>
+  </a>
   <script type="text/javascript" src="script.js"></script>
 </body>
 </html>
