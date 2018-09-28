@@ -69,6 +69,7 @@ var colors2 = [
   button.setAttribute("style", `background-color: ${color}`);
   button.onclick = () => {
     toolColor = color;
+    document.getElementById('sampleBrush').value = color;
   }
   document.getElementById("colors1").appendChild(button);
 });
@@ -77,6 +78,7 @@ var colors2 = [
   button.setAttribute("style", `background-color: ${color}`);
   button.onclick = () => {
     toolColor = color;
+    document.getElementById('sampleBrush').value = color;
   }
   document.getElementById("colors2").appendChild(button);
 });
