@@ -140,7 +140,7 @@ resizeCanvas();
 
 // Functions
 function clearCanvas(e) {
-  var result = confirm( 'Are you sure you want to delete the picture and saved colors?' );
+  var result = confirm( 'Are you sure you want to delete the picture?' );
   e.prevenDefault;
   if ( result ) {
     context.clearRect( 0, 0, canvas.width, canvas.height );
