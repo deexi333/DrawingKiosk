@@ -6,7 +6,7 @@ var toolMode = 'draw'
 var toolSize = 50;
 var toolOpacity = 100;
 var toolColor = '#FFFFFF';
-window.colorsList = [];
+var colorsList = [];
 var canvasState = [];
 var undoButton = document.querySelector( '[data-action=undo]' );
 var currentBackgroundIdx = 0;
@@ -139,12 +139,13 @@ document.getElementById( 'sampleBrush' ).oninput = (evt) => {
 resizeCanvas();
 
 // Functions
-function clearCanvas() {
+function clearCanvas(e) {
   var result = confirm( 'Are you sure you want to delete the picture and saved colors?' );
+  e.prevenDefault;
   if ( result ) {
-    // context.clearRect( 0, 0, canvas.width, canvas.height );
-    // canvasState.length = 0;
-    // undoButton.classList.add( 'disabled' );
+    context.clearRect( 0, 0, canvas.width, canvas.height );
+    canvasState.length = 0;
+    undoButton.classList.add( 'disabled' );
   }
 }
 
@@ -229,8 +230,9 @@ function selectTool( e ) {
   toolColor = e.target.dataset.color || toolColor;
   if ( e.target === undoButton ) undoState();
   if ( e.target.dataset.action == 'delete' ) {
-    clearCanvas();
-    location.reload();
+    clearCanvas(e);
+    document.getElementById( 'opacityRange' ).classList.remove('d-none');
+    document.getElementById( 'widthRange' ).classList.remove('d-none');
   }
 }
 
